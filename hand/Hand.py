@@ -7,9 +7,9 @@ from hand.Palm.Palm import Palm
 class Hand:
 
     def __init__(self, socket):
+        self.socket = socket
         self.right = self.Side("R", self.socket)
         self.left = self.Side("L", self.socket)
-        self.socket = socket
 
     class Side:
         def __init__(self, side, socket):

@@ -1,41 +1,26 @@
-import numpy as np
-import cv2 as cv
 import socket
+
+from utils import send_msg
+
+from hand.Hand import Hand
+from body.Head import Head
+from body.Neck import Neck
+from body.Torso import Torso
+
 
 class Robot:
     def __init__(self, HOST, PORT):
         self.HOST = HOST
         self.PORT = PORT
 
-        self.left_cap = cv.VideoCapture('http://10.127.50.72:801')
-        self.right_cap = cv.VideoCapture('http://10.127.50.72:800')
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket.connect((self.HOST, self.PORT))
 
-        self.bm = cv.StereoSGBM_create(
-            blockSize=3, numDisparities=96,
-            P1=305, P2=2048, mode=cv.StereoSGBM_MODE_HH)
+        self.hand = Hand(self.socket)
+        self.head = Head(self.socket)
+        self.neck = Neck(self.socket)
+        self.torso = Torso(self.socket)
 
-        self.me = {
-                'head': {
-                    'yaw': 0,
-                    'pitch': 0,
-                    'roll': 0
-                },
-                'torso': {
-                    'yaw': 0,
-                    'pitch': 0,
-                    'roll': 0
-                },
-                'shoulder_L': {
-                    'yaw': 0,
-                    'pitch': 0,
-                    'roll': 0
-                },
-                'shoulder_R': {
-                    'yaw': 0,
-                    'pitch': 0,
-                    'roll': 0
-                }
-        }
 
         self.start_socket_shit()
 
