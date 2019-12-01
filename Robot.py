@@ -1,6 +1,10 @@
 import socket
-from hand.Hand import Hand
 from utils import send_msg
+
+from hand.Hand import Hand
+from body.Head import Head
+from body.Neck import Neck
+from body.Torso import Torso
 
 
 class Robot:
@@ -12,13 +16,11 @@ class Robot:
 
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.connect((self.HOST, self.PORT))
-        self.hand = Hand(self.socket)
 
-        self.head = {
-            'yaw': 0,
-            'pitch': 0,
-            'roll': 0
-        }
+        self.hand = Hand(self.socket)
+        self.head = Head(self.socket)
+        self.neck = Neck(self.socket)
+        self.torso = Torso(self.socket)
 
     def rotate_head(self, yaw=0, pitch=0, roll=0, absolute=False):
         if absolute:
