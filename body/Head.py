@@ -12,19 +12,19 @@ class Head:
         }
 
     def tilt(self, degree):
-        msg = "ROBOT:MOTORS:{}.HeadF:POSSET:{}".format(self.side, str(degree))
+        msg = "ROBOT:MOTORS:HeadF:POSSET:{}".format(str(degree))
         response = utils.send_msg(msg, self.socket)
         print(response)
         return response
 
     def shake(self, degree):
-        msg = "ROBOT:MOTORS:{}.HeadS:POSSET:{}".format(self.side, str(degree))
+        msg = "ROBOT:MOTORS:HeadS:POSSET:{}".format(str(degree))
         response = utils.send_msg(msg, self.socket)
         print(response)
         return response
 
     def rotate(self, degree):
-        msg = "ROBOT:MOTORS:{}.HeadR:POSSET:{}".format(self.side, str(degree))
+        msg = "ROBOT:MOTORS:HeadR:POSSET:{}".format(str(degree))
         response = utils.send_msg(msg, self.socket)
         print(response)
         return response

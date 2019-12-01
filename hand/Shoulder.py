@@ -12,7 +12,7 @@ class Shoulder:
         print(response)
         return response
 
-    def side(self, degree):
+    def move(self, degree):
         msg = "ROBOT:MOTORS:{}.ShoulderS:POSSET:{}".format(self.side, str(degree))
         response = utils.send_msg(msg, self.socket)
         print(response)
